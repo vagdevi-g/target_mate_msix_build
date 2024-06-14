@@ -43,8 +43,15 @@ jobs:
       - name: Build
         run: flutter build windows --dart-define-from-file=configs/github.json
 
+      - name: Create a self-signed certificate
+        run: |
+             $cert = New-SelfSignedCertificate -CertStoreLocation Cert:\LocalMachine\My -Subject "CN=YourCompanyName"
+             $pwd = ConvertTo-SecureString -String "your_password" -Force -AsPlainText
+             Export-PfxCertificate -Cert $cert -FilePath "$env:USERPROFILE\your_certificate.pfx" -Password $pwd
+
+
       - name: Create MSIX package
-        run: flutter pub run msix:create --no-sign --build-windows false
+        run: flutter pub run msix:create  --build-windows false
         
       # - name: Setup MSIX configs
       #   run: dart installers\msix\setup.dart installers\msix\ci.yaml ${{ secrets.WIN_CERT_PASSWORD }}
