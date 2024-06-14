@@ -44,7 +44,7 @@ jobs:
         run: flutter build windows --dart-define-from-file=configs/github.json
 
       - name: Create MSIX package
-        run: flutter pub run msix:create --build-windows false
+        run: flutter pub run msix:create --no-sign --build-windows false
         
       # - name: Setup MSIX configs
       #   run: dart installers\msix\setup.dart installers\msix\ci.yaml ${{ secrets.WIN_CERT_PASSWORD }}
