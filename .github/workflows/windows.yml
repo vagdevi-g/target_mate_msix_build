@@ -4,15 +4,15 @@ on:
   release:
     types: [ published ]
   workflow_dispatch:
-    inputs:
-      tag:
-        description: 'Release Tag'
-        required: true
-      upload:
-        description: 'Upload to release?'
-        type: boolean
-        required: true
-        default: false
+    # inputs:
+    #   tag:
+    #     description: 'Release Tag'
+    #     required: true
+    #   upload:
+    #     description: 'Upload to release?'
+    #     type: boolean
+    #     required: true
+    #     default: false
 
 jobs:
   build:
