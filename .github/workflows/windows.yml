@@ -42,10 +42,14 @@ jobs:
       # <-------- END: Utility scripts -------->
       - name: Build
         run: flutter build windows --dart-define-from-file=configs/github.json
-      - name: Setup MSIX configs
-        run: dart installers\msix\setup.dart installers\msix\ci.yaml ${{ secrets.WIN_CERT_PASSWORD }}
-      - name: Create MSIX Installer
-        run: flutter pub run msix:create
+
+      - name: Create MSIX package
+        run: flutter pub run msix:create --build-windows false
+        
+      # - name: Setup MSIX configs
+      #   run: dart installers\msix\setup.dart installers\msix\ci.yaml ${{ secrets.WIN_CERT_PASSWORD }}
+      # - name: Create MSIX Installer
+      #   run: flutter pub run msix:create
       - name: Rename file
         run: ren TargetMate.msix TargetMate-windows-${{ steps.GetTag.outputs.tag }}.msix
       - name: Upload Artifacts
